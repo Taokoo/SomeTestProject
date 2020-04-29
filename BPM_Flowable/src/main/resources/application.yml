@@ -1,0 +1,35 @@
+server:
+    port: 8083
+spring:
+#mysql数据库配置
+    datasource:
+       url: jdbc:mysql://127.0.0.1:3306/roommateircle?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+       username: root
+       password: 1234
+       driver-class-name: com.mysql.jdbc.Driver
+    application:
+       name: Service2
+    cloud:
+       client:
+          ipAddress: 127.0.0.1
+          
+#mybatis
+mybatis:
+   mapper-locations: classpath:mapper/*.xml
+   type-aliases-package: com.taokoo.dao
+   
+#eureka
+eureka:
+   client:
+      fetch-registry: true #获取Eureka的注册表
+      serviceUrl:
+         defaultZone: http://127.0.0.1:8081/eureka/
+      
+   instance:
+      preferIpAddress: true
+      instanceId: ${spring.cloud.client.ipAddress}:${server.port}
+feign:
+  hystrix:
+    enabled: true
+   
+     
