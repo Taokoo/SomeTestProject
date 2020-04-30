@@ -17,13 +17,13 @@
         <userTask id="directorTak" name="经理审批">
             <extensionElements>
                 <flowable:taskListener event="create"
-                                       class="com.haiyang.flowable.listener.ManagerTaskHandler"></flowable:taskListener>
+                                       class="com.taokoo.listener.ManagerTaskHandler"></flowable:taskListener>
             </extensionElements>
         </userTask>
         <userTask id="bossTask" name="老板审批">
             <extensionElements>
                 <flowable:taskListener event="create"
-                                       class="com.haiyang.flowable.listener.BossTaskHandler"></flowable:taskListener>
+                                       class="com.taokoo.listener.BossTaskHandler"></flowable:taskListener>
             </extensionElements>
         </userTask>
         <endEvent id="end" name="结束"></endEvent>
