@@ -3,9 +3,9 @@
   <process id="TaokooTestLeave" name="测试请假" isExecutable="true">
     <documentation>Taokoo测试流程-请假</documentation>
     <startEvent id="startEvent1" name="开始 "></startEvent>
-    <userTask id="sid-6D80AE48-42B4-464E-8338-2ECBD0EB0197" name="发起请假申请" flowable:assignee="${taskUser}">
+    <userTask id="sid-6D80AE48-42B4-464E-8338-2ECBD0EB0197" name="发起请假申请" flowable:assignee="$INITIATOR">
       <extensionElements>
-        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:activiti-idm-initiator xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-initiator>
       </extensionElements>
     </userTask>
     <sequenceFlow id="sid-B01E625A-9F70-4F5A-829D-1EB3CBCE113A" sourceRef="startEvent1" targetRef="sid-6D80AE48-42B4-464E-8338-2ECBD0EB0197"></sequenceFlow>
