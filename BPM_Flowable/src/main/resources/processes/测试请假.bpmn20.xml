@@ -4,9 +4,9 @@
     <documentation>Taokoo测试流程-请假</documentation>
     <startEvent id="startEvent1" name="开始
 "></startEvent>
-    <userTask id="sid-6D80AE48-42B4-464E-8338-2ECBD0EB0197" name="发起请假申请" flowable:assignee="$INITIATOR">
+    <userTask id="sid-6D80AE48-42B4-464E-8338-2ECBD0EB0197" name="发起请假申请" flowable:assignee="${taskUser}">
       <extensionElements>
-        <modeler:activiti-idm-initiator xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-initiator>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
       </extensionElements>
     </userTask>
     <sequenceFlow id="sid-B01E625A-9F70-4F5A-829D-1EB3CBCE113A" sourceRef="startEvent1" targetRef="sid-6D80AE48-42B4-464E-8338-2ECBD0EB0197"></sequenceFlow>
@@ -21,7 +21,8 @@
       </extensionElements>
     </userTask>
     <sequenceFlow id="sid-A2DF8FA0-D0E6-44DB-B82F-7EF5314AB714" sourceRef="sid-6D80AE48-42B4-464E-8338-2ECBD0EB0197" targetRef="sid-EA2323E2-FC17-43E4-96C9-705B85E73565"></sequenceFlow>
-    <sequenceFlow id="sid-AADF51FF-D799-422C-8AD4-981FC0C55AA4" sourceRef="sid-EA2323E2-FC17-43E4-96C9-705B85E73565" targetRef="sid-389F9E02-6070-4C57-AA69-007D6C50FC89"></sequenceFlow>
+    <sequenceFlow id="sid-AADF51FF-D799-422C-8AD4-981FC0C55AA4" name="通过" sourceRef="sid-EA2323E2-FC17-43E4-96C9-705B85E73565" targetRef="sid-389F9E02-6070-4C57-AA69-007D6C50FC89"></sequenceFlow>
+    <sequenceFlow id="sid-FB795AC8-F483-41FE-B42A-961D86DE2C65" name="驳回" sourceRef="sid-EA2323E2-FC17-43E4-96C9-705B85E73565" targetRef="sid-6D80AE48-42B4-464E-8338-2ECBD0EB0197"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_TaokooTestLeave">
     <bpmndi:BPMNPlane bpmnElement="TaokooTestLeave" id="BPMNPlane_TaokooTestLeave">
@@ -44,6 +45,12 @@
       <bpmndi:BPMNEdge bpmnElement="sid-AADF51FF-D799-422C-8AD4-981FC0C55AA4" id="BPMNEdge_sid-AADF51FF-D799-422C-8AD4-981FC0C55AA4">
         <omgdi:waypoint x="594.95" y="135.0"></omgdi:waypoint>
         <omgdi:waypoint x="720.0" y="135.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-FB795AC8-F483-41FE-B42A-961D86DE2C65" id="BPMNEdge_sid-FB795AC8-F483-41FE-B42A-961D86DE2C65">
+        <omgdi:waypoint x="545.0" y="174.95"></omgdi:waypoint>
+        <omgdi:waypoint x="545.0" y="315.0"></omgdi:waypoint>
+        <omgdi:waypoint x="335.0" y="315.0"></omgdi:waypoint>
+        <omgdi:waypoint x="335.0" y="174.95"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-A2DF8FA0-D0E6-44DB-B82F-7EF5314AB714" id="BPMNEdge_sid-A2DF8FA0-D0E6-44DB-B82F-7EF5314AB714">
         <omgdi:waypoint x="384.94999999995036" y="135.0"></omgdi:waypoint>
