@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taokoo.dao.SgdUserMapper">
+	<resultMap id="BaseResultMap" type="com.taokoo.model.SgdUser">
+		<result column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="USERNAME" jdbcType="VARCHAR" property="userName" />
+		<result column="PASSWORD" jdbcType="VARCHAR" property="passWord" />
+		<result column="STU_NAME" jdbcType="VARCHAR" property="stuName" />
+		<result column="STU_MAIL" jdbcType="VARCHAR" property="stuMail" />
+		<result column="STU_PHONE" jdbcType="VARCHAR" property="stuPhone" />
+		<result column="STU_ADDRESS" jdbcType="VARCHAR" property="stuAddress" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID,USERNAME,PASSWORD,STU_NAME,STU_MAIL,STU_PHONE,STU_ADDRESS
+	</sql>
+
+	<select id="getUserById" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sgd_user where id = #{id}
+	</select>
+
+	<select id="getUserByName" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sgd_user where USERNAME = #{userName}
+	</select>
+
+	<insert id="insert" parameterType="com.taokoo.model.SgdUser">
+		insert into sgd_user 
+		(ID, USERNAME, PASSWORD,
+		STU_NAME, STU_MAIL, STU_PHONE,
+		STU_ADDRESS)
+		values 
+		(#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+		#{passWord,jdbcType=VARCHAR},
+		#{stuName,jdbcType=VARCHAR}, #{stuMail,jdbcType=VARCHAR}, #{stuPhone,jdbcType=INTEGER},
+		#{stuAddress,jdbcType=VARCHAR}
+		)
+	</insert>
+
+</mapper>

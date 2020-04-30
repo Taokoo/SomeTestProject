@@ -1,0 +1,22 @@
+server:
+    port: 8888
+spring:
+#mysql数据库配置
+    datasource:
+       url: jdbc:mysql://127.0.0.1:3306/sgd?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+       username: root
+       password: 1234
+       driver-class-name: com.mysql.jdbc.Driver
+    application:
+       name: SchoolGoodsDisplace
+    cloud:
+       client:
+          ipAddress: 127.0.0.1
+#mybatis
+mybatis:
+   mapper-locations: classpath:mapper/*.xml
+   type-aliases-package: com.taokoo.dao
+           
+      
+   
+     
