@@ -1,5 +1,7 @@
 package com.taokoo.util;
 
+import java.util.UUID;
+
 /**
  * 随机验证码工具类
  * 
@@ -18,5 +20,14 @@ public class ValiCodeUtil {
             num = num + String.valueOf((int)Math.floor(Math.random() * 9 + 1));
         }
         return num;
+    }
+    
+    /**
+     * 生成UUID
+     * @param args
+     * @return
+     */
+    public static String generateUUID() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 }

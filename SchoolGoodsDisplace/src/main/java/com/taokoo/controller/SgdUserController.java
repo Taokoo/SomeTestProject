@@ -1,7 +1,6 @@
 package com.taokoo.controller;
 
 import java.util.Map;
-import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
@@ -82,7 +81,7 @@ public class SgdUserController extends BasePageAccess {
                 return rs;
             }
             user = new SgdUser();
-            user.setId(UUID.randomUUID().toString());
+            user.setId(ValiCodeUtil.generateUUID());
             user.setUserName(userName);
             user.setPassWord(passWord);
             user.setStuName(stuName);
