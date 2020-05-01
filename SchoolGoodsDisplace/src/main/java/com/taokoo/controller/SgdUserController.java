@@ -2,8 +2,10 @@ package com.taokoo.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.taokoo.BasePageAccess;
 import com.taokoo.exception.ParameterException;
 import com.taokoo.model.JsonResult;
@@ -118,6 +121,7 @@ public class SgdUserController extends BasePageAccess {
      * @param response
      * @return 
      */
+    
     @RequestMapping(value = "/sendValiCode", method = RequestMethod.POST)
     public JsonResult sendValiCodeToMail(@RequestBody String jsonStr, HttpServletRequest request, HttpServletResponse response) {
         JsonResult rs = new JsonResult();
