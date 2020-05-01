@@ -71,13 +71,4 @@ public class MailUtil {
         isSuccess = true;
         return isSuccess;
     }
-
-    public static void main(String[] args) { // 做测试用
-        // String toMail="xxxxx@fenglinggame.com";
-        String toMail = "ocean@taokoo.com";
-        String text = "你好,<a href='http://www.baidu.com'>激活</a>有惊喜噢";
-        String title = "测试小通知";
-        sendMail(toMail, text, title);
-    }
-
 }
