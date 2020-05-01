@@ -14,15 +14,16 @@ public class TestRedisUtil extends BaseTest {
     @Test
     public void setRedis() {
         redisTemplate.opsForValue().set("first","测试不过期数据");
-        redisTemplate.opsForValue().set("second","测试30秒过期数据",30, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set("second","测试30秒过期数据",5, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set("second","测试30秒过期数据",10, TimeUnit.SECONDS);
         System.out.println("存入缓存成功");
     }
     @Test
     public void getRedis(){
-        String first = redisTemplate.opsForValue().get("first");
+//        String first = redisTemplate.opsForValue().get("first");
         String second = redisTemplate.opsForValue().get("second");
 
-        System.out.println("取出缓存中first的数据是:"+first);
+//        System.out.println("取出缓存中first的数据是:"+first);
         System.out.println("取出缓存中second的数据是:"+second);
 
     }
