@@ -39,5 +39,13 @@
 		#{stuAddress,jdbcType=VARCHAR}
 		)
 	</insert>
+	
+	<select id="login" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sgd_user where 1=1
+		and USERNAME = #{userName}
+		and PASSWORD = #{passWord}
+	</select>
 
 </mapper>

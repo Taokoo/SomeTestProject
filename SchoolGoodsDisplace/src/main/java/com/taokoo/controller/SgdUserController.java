@@ -1,5 +1,6 @@
 package com.taokoo.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import com.taokoo.service.SgdUserService;
 import com.taokoo.util.MailUtil;
 import com.taokoo.util.MapValueUtil;
 import com.taokoo.util.RedisUtil;
+import com.taokoo.util.TokenUtil;
 import com.taokoo.util.ValiCodeUtil;
 /**
  * 用户controller类
@@ -40,7 +42,7 @@ public class SgdUserController extends BasePageAccess {
 	}
 
 	/**
-	 * 用户注册
+	 * 注册
 	 * @param jsonStr
 	 * @param request
 	 * @param response
@@ -48,9 +50,6 @@ public class SgdUserController extends BasePageAccess {
 	 */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
 	public JsonResult register(@RequestBody String jsonStr, HttpServletRequest request, HttpServletResponse response) {
-//        Map<String, Object> map = null;
-//        boolean rb = false;
-//        String msg = "注册失败";
         JsonResult rs = new JsonResult();
         Map<String, Object> paramMap;
         try {
@@ -132,6 +131,50 @@ public class SgdUserController extends BasePageAccess {
             rs.setStatus(true);
             rs.setMessage("验证码已发送");
             return rs;
+        } catch (JSONException e) {
+            rs.setStatus(false);
+            rs.setMessage("参数格式错误");
+            return rs;
+        } catch (ParameterException e) {
+            rs.setStatus(false);
+            rs.setMessage(e.getMessage());
+            return rs;
+        } catch (Exception e) {
+            rs.setStatus(false);
+            rs.setMessage("系统错误");
+            return rs;
+        }
+    }
+    
+    /**
+     * 登录
+     * @param jsonStr
+     * @param request
+     * @param response
+     * @return token
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public JsonResult login(@RequestBody String jsonStr, HttpServletRequest request, HttpServletResponse response) {
+        JsonResult rs = new JsonResult();
+        Map<String, Object> paramMap;
+        Map<String, Object> map = null;
+        try {
+            paramMap = getParamMap(jsonStr);
+            String userName = MapValueUtil.getString(paramMap, "username");
+            String passWord = MapValueUtil.getString(paramMap, "password");
+            SgdUser sgdUser = sgdUserService.login(userName, passWord);
+            if(null == sgdUser) {
+                rs.setStatus(false);
+                rs.setMessage("账号或密码不正确");
+                return rs;
+            }
+            map = new HashMap<String, Object>();
+            String token = TokenUtil.getxToken(sgdUser.getId(), sgdUser.getUserName());
+            redisUtil.setRedis(token,sgdUser.getId(), 300);//设置5分钟过期时间
+            map.put("token",token);
+            map.put("userName",userName);
+            map.put("stuName",sgdUser.getStuName());
+            return new JsonResult(map,true,"登录成功");
         } catch (JSONException e) {
             rs.setStatus(false);
             rs.setMessage("参数格式错误");

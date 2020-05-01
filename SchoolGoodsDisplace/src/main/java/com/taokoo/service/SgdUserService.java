@@ -25,5 +25,9 @@ public class SgdUserService {
     public int addUser(SgdUser user) {
         return sgdUserMapper.insert(user);
     }
+    
+    public SgdUser login(String userName,String passWord) {
+        return sgdUserMapper.login(userName, passWord);
+    }
 
 }

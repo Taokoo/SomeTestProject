@@ -20,5 +20,7 @@ public interface SgdUserMapper {
 	SgdUser getUserByName(String userName);
 	
 	int insert(SgdUser user);
+	
+	SgdUser login(String userName,String passWord);
 
 }
